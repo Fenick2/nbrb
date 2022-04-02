@@ -25,7 +25,7 @@ async def start(message: types.Message):
 async def all_currency(message: types.Message):
     with open('./data/favorite_currencies.json') as file:
         data = json.load(file)
-        s = f""
+        s = f"***** На дату {data[0]['Date'][:10]} *****\n"
         for i in data:
             for k, v in i.items():
                 s += f"{v['Cur_Name']}: {v['Cur_OfficialRate']} BYN / {v['Cur_Scale']} {k}\n"
@@ -36,7 +36,7 @@ async def all_currency(message: types.Message):
 async def all_currency(message: types.Message):
     with open('./data/day_all_currencies.json') as file:
         data = json.load(file)
-        s = f""
+        s = f"***** На дату {data[0]['Date'][:10]} *****\n"
         for v in data:
             s += f"{v['Cur_Name']}: {v['Cur_OfficialRate']} BYN / {v['Cur_Scale']} {v['Cur_Abbreviation']}\n"
         await message.reply(s)
@@ -46,7 +46,7 @@ async def all_currency(message: types.Message):
 async def all_currency(message: types.Message):
     with open('./data/month_all_currencies.json') as file:
         data = json.load(file)
-        s = f"*** На дату {data[0]['Date'][:10]} ***\n"
+        s = f"***** На дату {data[0]['Date'][:10]} *****\n"
         for v in data:
             s += f"{v['Cur_Name']}: {v['Cur_OfficialRate']} BYN / {v['Cur_Scale']} {v['Cur_Abbreviation']}\n"
         await message.reply(s)
