@@ -1,4 +1,5 @@
 import json
+import aiohttp
 import requests
 import schedule
 import time
@@ -50,7 +51,6 @@ def store_month_all_currencies():
         else:
             count -= 1
             time.sleep(10)
-            
     return "Невозможно получить данные за месяц"
 
 
@@ -70,17 +70,17 @@ def store_favorite_currencies():
     return
 
 
-schedule.every().day.at("21:00").do(store_day_all_currencies)
-schedule.every().day.at("21:05").do(store_favorite_currencies)
-schedule.every().day.at("00:05").do(store_month_all_currencies)
+# schedule.every().day.at("00:05").do(store_day_all_currencies)
+# schedule.every().day.at("00:07").do(store_favorite_currencies)
+# schedule.every().day.at("00:10").do(store_month_all_currencies)
 
 # while True:
 #     schedule.run_pending()
 #     time.sleep(1)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     store_day_all_currencies()
-    time.sleep(5)
-    store_favorite_currencies()
-    time.sleep(5)
     store_month_all_currencies()
+    store_favorite_currencies()
+    print("Все данные сохранены")
