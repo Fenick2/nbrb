@@ -1,42 +1,42 @@
 [
     {
         "Cur_ID": 431,
-        "Date": "2022-04-13T00:00:00",
+        "Date": "2022-07-19T00:00:00",
         "Cur_Abbreviation": "USD",
         "Cur_Scale": 1,
         "Cur_Name": "Доллар США",
-        "Cur_OfficialRate": 2.83
+        "Cur_OfficialRate": 2.5433
     },
     {
         "Cur_ID": 451,
-        "Date": "2022-04-13T00:00:00",
+        "Date": "2022-07-19T00:00:00",
         "Cur_Abbreviation": "EUR",
         "Cur_Scale": 1,
         "Cur_Name": "Евро",
-        "Cur_OfficialRate": 3.076
+        "Cur_OfficialRate": 2.572
     },
     {
         "Cur_ID": 462,
-        "Date": "2022-04-13T00:00:00",
+        "Date": "2022-07-19T00:00:00",
         "Cur_Abbreviation": "CNY",
         "Cur_Scale": 10,
         "Cur_Name": "Китайских юаней",
-        "Cur_OfficialRate": 4.4427
+        "Cur_OfficialRate": 3.7736
     },
     {
         "Cur_ID": 456,
-        "Date": "2022-04-13T00:00:00",
+        "Date": "2022-07-19T00:00:00",
         "Cur_Abbreviation": "RUB",
         "Cur_Scale": 100,
         "Cur_Name": "Российских рублей",
-        "Cur_OfficialRate": 3.5556
+        "Cur_OfficialRate": 4.4767
     },
     {
         "Cur_ID": 429,
-        "Date": "2022-04-13T00:00:00",
+        "Date": "2022-07-19T00:00:00",
         "Cur_Abbreviation": "GBP",
         "Cur_Scale": 1,
         "Cur_Name": "Фунт стерлингов",
-        "Cur_OfficialRate": 3.681
+        "Cur_OfficialRate": 3.0462
     }
 ]

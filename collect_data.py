@@ -1,8 +1,13 @@
+import logging
 import json
-import aiohttp
 import requests
 import schedule
 import time
+from urllib3 import disable_warnings, exceptions
+
+
+logging.basicConfig(level=logging.WARN)
+disable_warnings(exceptions.InsecureRequestWarning)
 
 
 FAVORITE = ("USD", "EUR", "RUB", "GBP", "CNY")
@@ -14,9 +19,8 @@ month_currencies = 'https://www.nbrb.by/api/exrates/rates?periodicity=1'
 def get_currencies(url):
     """Возвращает JSON с курсами валют НБ РБ."""
     try:
-        response = requests.get(url)
-        data = response.json()
-        return data
+        with requests.get(url, verify=False) as response:
+            return response.json()
     except Exception as e:
         print(e)
         return 
@@ -70,17 +74,17 @@ def store_favorite_currencies():
     return
 
 
-# schedule.every().day.at("00:05").do(store_day_all_currencies)
-# schedule.every().day.at("00:07").do(store_favorite_currencies)
-# schedule.every().day.at("00:10").do(store_month_all_currencies)
+schedule.every().day.at("00:05").do(store_day_all_currencies)
+schedule.every().day.at("00:07").do(store_favorite_currencies)
+schedule.every().day.at("00:10").do(store_month_all_currencies)
 
-# while True:
-#     schedule.run_pending()
-#     time.sleep(1)
+while True:
+    schedule.run_pending()
+    time.sleep(1)
 
 
-if __name__ == "__main__":
-    store_day_all_currencies()
-    store_month_all_currencies()
-    store_favorite_currencies()
-    print("Все данные сохранены")
+# if __name__ == "__main__":
+#     store_day_all_currencies()
+#     store_month_all_currencies()
+#     store_favorite_currencies()
+#     print("Все данные сохранены")

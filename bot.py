@@ -11,6 +11,10 @@ from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.dispatcher.filters import Text
 from aiogram.dispatcher.filters.state import State, StatesGroup
 from dotenv import load_dotenv
+from urllib3 import disable_warnings, exceptions
+
+
+disable_warnings(exceptions.InsecureRequestWarning)
 
 load_dotenv()
 
@@ -45,7 +49,7 @@ async def all_currency(message: types.Message):
         await message.reply(s)
 
 
-@dp.message_handler(filters.Text(equals='Основные'))
+@dp.message_handler(filters.Text(equals='Ежедневный'))
 async def all_currency(message: types.Message):
     with open('./data/day_all_currencies.json') as file:
         data = json.load(file)
@@ -56,7 +60,7 @@ async def all_currency(message: types.Message):
         await message.reply(s)
 
 
-@dp.message_handler(filters.Text(equals='Остальные'))
+@dp.message_handler(filters.Text(equals='Ежемесячный'))
 async def all_currency(message: types.Message):
     with open('./data/month_all_currencies.json') as file:
         data = json.load(file)
@@ -97,7 +101,7 @@ async def get_currency_on_date(date: types.Message, state: FSMContext):
         return
     else:
         async with aiohttp.ClientSession() as session:
-            async with session.get(f'https://www.nbrb.by/api/exrates/rates?ondate={in_date}&periodicity=0') as resp:
+            async with session.get(f'https://www.nbrb.by/api/exrates/rates?ondate={in_date}&periodicity=0', verify_ssl=False) as resp:
                 level = await resp.json()
                 s = f"***** На дату {level[0]['Date'][:10]} *****\n"
                 
@@ -108,4 +112,4 @@ async def get_currency_on_date(date: types.Message, state: FSMContext):
 
 
 if __name__ == '__main__':
-    executor.start_polling(dp)
+    executor.start_polling(dp, on_startup=on_startup)

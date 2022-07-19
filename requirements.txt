@@ -1,5 +1,0 @@
-aiogram==2.19
-aiohttp==3.8.1
-python-dotenv==0.20.0
-requests==2.22.0
-schedule==1.1.0
