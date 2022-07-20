@@ -1,17 +1,15 @@
-import logging
 import json
 import requests
 import schedule
 import time
 from urllib3 import disable_warnings, exceptions
 
+import logs
 
-logging.basicConfig(level=logging.WARN)
+
 disable_warnings(exceptions.InsecureRequestWarning)
 
-
 FAVORITE = ("USD", "EUR", "RUB", "GBP", "CNY")
-
 day_currencies = 'https://www.nbrb.by/api/exrates/rates?periodicity=0'
 month_currencies = 'https://www.nbrb.by/api/exrates/rates?periodicity=1'
 
@@ -88,3 +86,5 @@ while True:
 #     store_month_all_currencies()
 #     store_favorite_currencies()
 #     print("Все данные сохранены")
+
+# docker run --rm --mount source=/home/kolya/ucheba/TlgrmBots/nbrb/logs,target=/app/logs --mount source=/home/kolya/ucheba/TlgrmBots/nbrb/data,target=/app/data nbrb
