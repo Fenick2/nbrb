@@ -2,10 +2,15 @@ import json
 import requests
 import schedule
 import time
+from loguru import logger
 from urllib3 import disable_warnings, exceptions
 
-import logs
 
+logger.info("Start logging (INFO)")
+logger.add("./logs/collect_data.log", 
+           format="{time} {level} {message}", 
+           level="INFO"
+)
 
 disable_warnings(exceptions.InsecureRequestWarning)
 
@@ -24,9 +29,10 @@ def get_currencies(url):
         return 
 
 
+@logger.catch
 def store_day_all_currencies():
     """Записывает JSON с основными валютами на диск."""
-    count = 5
+    count = 3
     while count:
         data = get_currencies(day_currencies)
         
@@ -36,13 +42,14 @@ def store_day_all_currencies():
             return
         else:
             count -= 1
-            time.sleep(10)
+            time.sleep(1)
     return "Невозможно получить данные за день"
 
 
+@logger.catch
 def store_month_all_currencies():
     """Записывает JSON с остальными валютами на диск."""
-    count = 5
+    count = 3
     
     while count:
         data = get_currencies(month_currencies)
@@ -52,10 +59,11 @@ def store_month_all_currencies():
             return
         else:
             count -= 1
-            time.sleep(10)
+            time.sleep(2)
     return "Невозможно получить данные за месяц"
 
 
+@logger.catch
 def store_favorite_currencies():
     """Записывает JSON с избранными валютами на диск."""
 
