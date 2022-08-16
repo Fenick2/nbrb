@@ -72,19 +72,19 @@ def store_favorite_currencies():
     return
 
 
-schedule.every().day.at("00:05").do(store_day_all_currencies)
-schedule.every().day.at("00:07").do(store_favorite_currencies)
-schedule.every().day.at("00:10").do(store_month_all_currencies)
+# schedule.every().day.at("00:05").do(store_day_all_currencies)
+# schedule.every().day.at("00:07").do(store_favorite_currencies)
+# schedule.every().day.at("00:10").do(store_month_all_currencies)
 
-while True:
-    schedule.run_pending()
-    time.sleep(1)
+# while True:
+#     schedule.run_pending()
+#     time.sleep(1)
 
 
-# if __name__ == "__main__":
-#     store_day_all_currencies()
-#     store_month_all_currencies()
-#     store_favorite_currencies()
-#     print("Все данные сохранены")
+if __name__ == "__main__":
+    store_day_all_currencies()
+    store_month_all_currencies()
+    store_favorite_currencies()
+    print("Все данные сохранены")
 
-# docker run --rm --mount source=/home/kolya/ucheba/TlgrmBots/nbrb/logs,target=/app/logs --mount source=/home/kolya/ucheba/TlgrmBots/nbrb/data,target=/app/data nbrb
+# docker run -d --mount type=bind,source="$(pwd)"/logs,target=/app/logs -v "$(pwd)"/data:/app/data fenick/nbrb:latest
